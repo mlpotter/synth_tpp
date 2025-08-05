@@ -1,9 +1,0 @@
-LICENSE
-README.md
-pyproject.toml
-src/__init__.py
-src/generator.py
-src/synth_tpp.egg-info/PKG-INFO
-src/synth_tpp.egg-info/SOURCES.txt
-src/synth_tpp.egg-info/dependency_links.txt
-src/synth_tpp.egg-info/top_level.txt
