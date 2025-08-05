@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools >= 77.0.3","hawkesbook","numpy","numba"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "synth_tpp"
+version = "0.0.1"
+authors = [
+  { name="Michael Potter", email="potter.mi@northeastern.edu" },
+]
+description = "A small package to simulate toy datasets for temporal point processes."
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/pypa/sampleproject"
+Issues = "https://github.com/pypa/sampleproject/issues"
