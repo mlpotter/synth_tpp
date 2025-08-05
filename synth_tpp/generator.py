@@ -56,6 +56,7 @@ def generator_factory(process_type):
         return LognormalRenewalTPP(theta)
     elif process_type == "self_correcting":
         # Example parameters for self_correcting
-        return SelfCorrectingTPP()
+        theta = np.array([1.0, 1.0])
+        return SelfCorrectingTPP(theta)
     else:
         raise ValueError(f"Unknown process type: {process_type}")

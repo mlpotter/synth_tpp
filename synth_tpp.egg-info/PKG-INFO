@@ -59,7 +59,7 @@ tpp = LognormalRenewalTPP([1.0, 2.0])
 sequences, session_times = generate_dataset_T(
     model=tpp,
     Tmin=50,
-    Tmax=100
+    Tmax=100,
     num_sequences=100
 )
 
