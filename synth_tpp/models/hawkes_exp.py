@@ -2,6 +2,7 @@ from hawkesbook import exp_hawkes_compensators
 import numpy as np
 from numba import njit
 from synth_tpp.models.base import BaseTPP
+import numpy.random as rnd
 
 # @njit(nogil=True)
 def hawkes_exp_simulate_by_composition_T(𝛉, T):

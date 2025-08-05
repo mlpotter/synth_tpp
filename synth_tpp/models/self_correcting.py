@@ -1,6 +1,8 @@
 from hawkesbook import exp_hawkes_compensators
 import numpy as np
 from numba import njit
+import numpy.random as rnd
+
 from abc import ABC, abstractmethod
 from .base import BaseTPP
 

@@ -1,6 +1,8 @@
 from scipy.stats import lognorm
 import numpy as np
 from numba import njit
+import numpy.random as rnd
+
 from .base import BaseTPP
 
 def lognormal_renewal_compensators(theta,ℋ_t):
@@ -30,11 +32,11 @@ def lognormal_renewal_intensity(t, ℋ_t, theta):
 
     return lognorm.pdf(t_diff, s=sigma, scale=np.exp(mu)) / lognorm.sf(t_diff, s=sigma, scale=np.exp(mu))
 
-def simulate_lognormal_renewal_N(theta, n_events):
+def simulate_lognormal_renewal_N(theta, n_points):
     """
     Simulate a stationary renewal process with log-normal inter-event intervals.
     Intervals are i.i.d. log-normal with given mean and std.
-    Simulation stops after n_events events.
+    Simulation stops after n_points events.
     """
     mean, std = theta
     variance = std ** 2
@@ -45,7 +47,7 @@ def simulate_lognormal_renewal_N(theta, n_events):
     t = 0.0
 
     # Convert mean and std to log-normal parameters
-    for _ in range(n_events):
+    for _ in range(n_points):
         interval = np.random.lognormal(mean=mu, sigma=sigma)
         t += interval
         events.append(t)
@@ -88,8 +90,8 @@ class LognormalRenewalTPP(BaseTPP):
     def compensator(self, history):
         return lognormal_renewal_compensators(self.theta, history)
 
-    def generate_T(self, history):
-        return simulate_lognormal_renewal_T(self.theta, history)
+    def generate_T(self, Tmax):
+        return simulate_lognormal_renewal_T(self.theta, Tmax)
 
-    def generate_N(self, T, history):
-        return simulate_lognormal_renewal_N(self.theta, T)
+    def generate_N(self, n_points):
+        return simulate_lognormal_renewal_N(self.theta, n_points)
