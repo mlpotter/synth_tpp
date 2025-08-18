@@ -39,8 +39,6 @@ def generate_dataset_T(model, Tmin, Tmax, num_sequences=100, key=123):
         T_list.append(T)
     return event_list, T_list
 
-
-
 def generator_factory(process_type):
     if process_type == "hawkes1":
         # Example parameters for hawkes1

@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools >= 77.0.3","hawkesbook","numpy","numba"]
+requires = ["setuptools >= 77.0.3"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -17,6 +17,12 @@ classifiers = [
 ]
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
+
+dependencies = [
+  "numpy",
+  "numba",
+  "hawkesbook"
+]
 
 [project.urls]
 Homepage = "https://github.com/pypa/sampleproject"
