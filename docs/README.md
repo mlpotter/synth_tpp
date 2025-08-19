@@ -2,6 +2,11 @@
 
 `synth_tpp` is a Python package designed to easily generate synthetic datasets for point process modeling. Inspired by the `hawkesbook` library, it provides flexible tools for simulating temporal point processes, making it ideal for experimentation, benchmarking, and educational purposes.
 
+<p align="center">
+    <img src="static/img/hawkes_example.png" alt="Example of synthetic Hawkes process sequence" width="800"/>
+</p>
+
+
 ## Features
 
 - Generate synthetic event sequences for various point process models
@@ -68,4 +73,4 @@ MIT License
 
 ## Acknowledgements
 
-Inspired by the [`hawkesbook`](https://github.com/hawkesbook/hawkesbook) library.
+Inspired by the [`hawkesbook`](https://github.com/hawkesbook/hawkesbook) library. Corrections to `hawkesbook` `exact` simulation for Hawkes processes based on [Dassios, Angelos and Zhao](https://eprints.lse.ac.uk/51370/1/Dassios_exact_simulation_hawkes.pdf) and MATLAB implementation [Brignone](https://www.mathworks.com/matlabcentral/fileexchange/74738-hawkes-simulation).

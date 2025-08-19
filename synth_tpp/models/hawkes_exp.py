@@ -21,19 +21,19 @@ def hawkes_exp_simulate_by_composition_T(𝛉, T):
         # so T_2 can be np.NaN. The Dassios & Zhao (2013) algorithm checks if this
         # expression is negative and handles it separately, though the lines
         # below have the same behaviour as t_k = min(T_1, np.NaN) will be T_1. 
-        T_1 = t_k - np.log(U_1) / λ
-        T_2 = t_k - np.log(1 + β/(λˣ_k + α - λ)*np.log(U_2))/β
+        
+        # simulate the (k+1)th interarrival-time 
+        delta_T_1 = -np.log(U_1) / λ
+        delta_T_2 = -np.log(1 + β/max(λˣ_k - λ,1e-32)*np.log(U_2))/β
+        delta_T = min(delta_T_1, delta_T_2)
 
-        t_prev = t_k
-        t_k = min(T_1, T_2)
+        t_k = t_k + delta_T
+
         ℋ.append(t_k)
 
-        if len(ℋ) > 1:
-            λˣ_k = λ + (λˣ_k + α - λ) * (
-                np.exp(-β * (t_k - t_prev)))
-        else:
-            λˣ_k = λ
-    
+        # record the change at the jump-time t_{k+1}
+        λˣ_k = λ + (λˣ_k - λ) * np.exp(-β * delta_T) + α
+        
     return ℋ[:-1]
 
 def hawkes_exp_simulate_by_composition_N(𝛉, N):
@@ -52,18 +52,18 @@ def hawkes_exp_simulate_by_composition_N(𝛉, N):
         # so T_2 can be np.NaN. The Dassios & Zhao (2013) algorithm checks if this
         # expression is negative and handles it separately, though the lines
         # below have the same behaviour as t_k = min(T_1, np.NaN) will be T_1. 
-        T_1 = t_k - np.log(U_1) / λ
-        T_2 = t_k - np.log(1 + β/(λˣ_k + α - λ)*np.log(U_2))/β
 
-        t_prev = t_k
-        t_k = min(T_1, T_2)
+        # simulate the (k+1)th interarrival-time 
+        delta_T_1 = -np.log(U_1) / λ
+        delta_T_2 = -np.log(1 + β/max(λˣ_k - λ,1e-32)*np.log(U_2))/β
+        delta_T = min(delta_T_1, delta_T_2)
+
+        t_k = t_k + delta_T
+
         ℋ[k] = t_k
 
-        if k > 0:
-            λˣ_k = λ + (λˣ_k + α - λ) * (
-                np.exp(-β * (t_k - t_prev)))
-        else:
-            λˣ_k = λ
+        # record the change at the jump-time t_{k+1}
+        λˣ_k = λ + (λˣ_k - λ) * np.exp(-β * delta_T) + α
           
     return ℋ
 
